@@ -1,0 +1,9 @@
+{
+  "val/test_score/nq": 0.4617728531855956,
+  "val/test_score/triviaqa": 0.6272429947847609,
+  "val/test_score/popqa": 0.4677227167589542,
+  "val/test_score/hotpotqa": 0.44307900067521944,
+  "val/test_score/2wikimultihopqa": 0.44743956743002544,
+  "val/test_score/musique": 0.19652461729416631,
+  "val/test_score/bamboogle": 0.4435483870967742
+}
