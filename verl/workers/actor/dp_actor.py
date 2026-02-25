@@ -376,7 +376,7 @@ class DataParallelPPOActor(BasePPOActor):
                     metrics["actor/mean_reduce_chunk"] = torch.mean(chunk_mask[adv_sum>=0].sum(-1).float()).detach().item()
                 else:
                     masked_response_mask = response_mask * positive_advantage_mask
-                    current_penalty_term = base_penalty_term * positive_advantage_mask
+                    current_penalty_term = diff_log_prob * positive_advantage_mask
                     penalty_sentence = verl_F.masked_sum(
                         current_penalty_term, masked_response_mask, axis=-1
                     )
@@ -419,9 +419,6 @@ class DataParallelPPOActor(BasePPOActor):
                 metrics.update({"actor/neg_avg_ref_log_prob": neg_avg_ref_log_prob.detach().item()})
 
 
-                # if entropy_loss.detach().item() >= self.config.reduce_threshold or pos_avg_old_log_prob.detach().item() < pos_avg_ref_log_prob.detach().item():
-                #     policy_loss = policy_loss + self.config.no_reduce_lambda * loss_noreduce
-                # else:
                 policy_loss = policy_loss +  loss_noreduce
                 metrics["actor/loss_noreduce"] = loss_noreduce.detach().item()
                 metrics["actor/loss_noreduce_coef"] = self.config.no_reduce_lambda
