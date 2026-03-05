@@ -1,8 +1,8 @@
-export no_proxy=".fbcdn.net,.facebook.com,.thefacebook.com,.tfbnw.net,.fb.com,.fburl.com,.facebook.net,.sb.fbsbx.com,localhost,127.0.0.1"
-export https_proxy=http://fwdproxy:8080
-export http_proxy=http://fwdproxy:8080
 export CUDA_VISIBLE_DEVICES=0,1,2,3
-export DATA_DIR='data/nq_hotpotqa_train'
+data_name=nq_hotpotqa_train
+export DATA_DIR='data'/${data_name} # first download the data from https://huggingface.co/datasets/PeterJinGo/nq_hotpotqa_train
+
+
 # export DATA_DIR_test='data/nq_search'
 export DATA_DIR_test='data/nq_search'
 export NO_REDUCE_LAMBDA=0.1
@@ -13,39 +13,29 @@ export NAN_CLIP=true
 export MASK_ANS=false
 export MASK_ADAPTIVE=false
 export MASK_WEIGHT=0.1
+export USE_GSPO=False
 
-# WAND_PROJECT='Search-R1-7B-nqhot'
-WAND_PROJECT='Search-R1-3B-nqhot'
-# WAND_PROJECT='Search-R1-llama3B-nqhot'
-# export BASE_MODEL='meta-llama/Llama-3.2-3B'
-# export EXPERIMENT_NAME=nq-search-r1-grpo-llama3.2-3b-em-sentence-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}
-# export BASE_MODEL='meta-llama/Llama-3.2-3B-Instruct'
-# export EXPERIMENT_NAME=nq-search-r1-grpo-llama3.2-3b-it-em
-# export BASE_MODEL='meta-llama/Llama-3.1-8B'
-# export EXPERIMENT_NAME=nq-search-r1-grpo-llama3.1-8b-em
-# export BASE_MODEL='meta-llama/Llama-3.1-8B-Instruct'
-# export EXPERIMENT_NAME=nq-search-r1-grpo-llama3.1-8b-it-em
+WAND_PROJECT='LLDS'
+
+
 
 export BASE_MODEL='Qwen/Qwen2.5-3B'
-export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-3b-em-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_WEIGHT}-nanclip${NAN_CLIP}-adaptive${MASK_ADAPTIVE}
+export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-3b-em-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_WEIGHT}-nanclip${NAN_CLIP}-GSPO${USE_GSPO}-adaptive${MASK_ADAPTIVE}
 # export BASE_MODEL='Qwen/Qwen2.5-3B-Instruct'
 # export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-3b-it-em-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}
 # export BASE_MODEL='Qwen/Qwen2.5-7B'
 # export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-7b-em-sentence-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}--chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}
 # export BASE_MODEL='Qwen/Qwen2.5-7B-Instruct'
 # export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-7b-it-em-sentence-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}
-# export BASE_MODEL='Qwen/Qwen2.5-3B-Instruct'
 
 # set -x
 export VLLM_ATTENTION_BACKEND=XFORMERS # vllm + qwen2-7b with flash_attn has some issues
-export WANDB_API_KEY=9b9851245cae921e8387b94a10cca0df74a12f07
-export WANDB_OFFICIAL=1
-export HYDRA_FULL_ERROR=1
+
 # max_prompt_length = (config['training']['max_start_length'] + config['training']['max_response_length'] * (config['training']['max_turns'] - 1) + config['training']['max_obs_length'] * config['training']['max_turns'])
 
 PYTHONUNBUFFERED=1 python3 -m verl.trainer.main_ppo \
     data.train_files=$DATA_DIR/train.parquet \
-    data.val_files=$DATA_DIR_test/test.parquet \
+    data.val_files=$DATA_DIR/test.parquet \
     data.train_data_num=null \
     data.val_data_num=null \
     data.train_batch_size=512 \
@@ -79,6 +69,7 @@ PYTHONUNBUFFERED=1 python3 -m verl.trainer.main_ppo \
     actor_rollout_ref.actor.reduce_threshold=$REDUCE_THRES \
     actor_rollout_ref.actor.answer_no_reduce_lambda=$MASK_WEIGHT \
     actor_rollout_ref.actor.mask_adaptive=$MASK_ADAPTIVE \
+    actor_rollout_ref.actor.use_gspo=$USE_GSPO \
     actor_rollout_ref.actor.chunk_noreduce=$ISCHUNK \
     actor_rollout_ref.actor.grad_nan_clip=$NAN_CLIP \
     actor_rollout_ref.actor.mask_answer=$MASK_ANS \
@@ -105,3 +96,5 @@ PYTHONUNBUFFERED=1 python3 -m verl.trainer.main_ppo \
     retriever.url="http://127.0.0.1:8000/retrieve" \
     retriever.topk=3 \
     2>&1 | tee $EXPERIMENT_NAME.log
+
+

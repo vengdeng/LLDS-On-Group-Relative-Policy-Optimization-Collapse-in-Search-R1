@@ -38,6 +38,7 @@ actor_rollout_ref:
     kl_loss_coef: 0.001 # for grpo
     kl_loss_type: low_var_kl # for grpo
     no_reduce_lambda: 0.0
+    use_gspo: False
     chunk_noreduce: False
     mask_adaptive: False # for mask adaptive
     reduce_threshold: 0.0
