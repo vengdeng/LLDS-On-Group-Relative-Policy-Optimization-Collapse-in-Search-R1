@@ -165,7 +165,7 @@ If you use this work, please cite:
 ```bibtex
 @article{llds2025,
   title={On Group Relative Policy Optimization Collapse in Agent Search: The Lazy Likelihood-Displacement}, 
-  author={Wenlong Deng and Yushu Li and Boying Gong and Yi Ren and Christos Thrampoulidis and Xiaoxiao Li},
+  author={Deng, Wenlong and Li, Yushu and Gong, Boying and Ren, Yi and Thrampoulidis, Christos and Li, Xiaoxiao},
   journal={arXiv preprint arXiv:2512.04220},
   year={2025}
 }
