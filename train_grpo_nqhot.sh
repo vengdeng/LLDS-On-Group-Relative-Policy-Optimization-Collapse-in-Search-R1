@@ -12,7 +12,7 @@ export ISCHUNK=true
 export NAN_CLIP=true
 export MASK_ANS=false
 export MASK_ADAPTIVE=false
-export MASK_WEIGHT=0.1
+export MASK_WEIGHT=0.2
 export USE_GSPO=False
 
 WAND_PROJECT='LLDS'
