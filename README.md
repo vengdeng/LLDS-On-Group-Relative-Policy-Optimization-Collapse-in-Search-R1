@@ -1,5 +1,5 @@
 
-<h1 align="center">[ICML2026] On GRPO Collapse in Search-R1: The Lazy Likelihood-Displacement Death Spiral</h1>
+<h1 align="center">[ICML2026] On Group Relative Policy Optimization Collapse in Agent Search: The Lazy Likelihood-Displacement</h1>
 
 
 <p align="center">
