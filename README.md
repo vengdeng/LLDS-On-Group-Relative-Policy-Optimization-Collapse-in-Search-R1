@@ -1,5 +1,5 @@
 
-<h1 align="center">On GRPO Collapse in Search-R1: The Lazy Likelihood-Displacement Death Spiral</h1>
+<h1 align="center">[ICML2026] On GRPO Collapse in Search-R1: The Lazy Likelihood-Displacement Death Spiral</h1>
 
 
 <p align="center">
