@@ -5,7 +5,7 @@ export DATA_DIR='data'/${data_name} # first download the data from https://huggi
 
 # export DATA_DIR_test='data/nq_search'
 export DATA_DIR_test='data/nq_search'
-export NO_REDUCE_LAMBDA=0.1
+export NO_REDUCE_LAMBDA=0.2
 export REDUCE_THRES=0.0
 export NLL_LOSS_COEF=0.0
 export ISCHUNK=true
@@ -19,14 +19,14 @@ WAND_PROJECT='LLDS'
 
 
 
-export BASE_MODEL='Qwen/Qwen2.5-3B'
-export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-3b-em-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_WEIGHT}-nanclip${NAN_CLIP}-GSPO${USE_GSPO}-adaptive${MASK_ADAPTIVE}
-# export BASE_MODEL='Qwen/Qwen2.5-3B-Instruct'
-# export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-3b-it-em-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}
+# export BASE_MODEL='Qwen/Qwen2.5-3B'
+# export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-3b-em-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_WEIGHT}-nanclip${NAN_CLIP}-GSPO${USE_GSPO}-adaptive${MASK_ADAPTIVE}
+export BASE_MODEL='Qwen/Qwen2.5-3B-Instruct'
+export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-3b-it-em-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}-GSPO${USE_GSPO}
 # export BASE_MODEL='Qwen/Qwen2.5-7B'
-# export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-7b-em-sentence-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}--chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}
+# export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-7b-em-sentence-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}--chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}-GSPO${USE_GSPO}
 # export BASE_MODEL='Qwen/Qwen2.5-7B-Instruct'
-# export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-7b-it-em-sentence-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}
+# export EXPERIMENT_NAME=nq-search-r1-grpo-qwen2.5-7b-it-em-sentence-lambda${NO_REDUCE_LAMBDA}-thres${REDUCE_THRES}-chunk${ISCHUNK}-answer_mask_${MASK_ANS}-nanclip${NAN_CLIP}-GSPO${USE_GSPO}
 
 # set -x
 export VLLM_ATTENTION_BACKEND=XFORMERS # vllm + qwen2-7b with flash_attn has some issues

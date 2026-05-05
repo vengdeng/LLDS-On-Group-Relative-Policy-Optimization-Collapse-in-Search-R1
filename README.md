@@ -1,7 +1,10 @@
-# On Group Relative Policy Optimization Collapse in Agent Search: The Lazy Likelihood-Displacement
 
-Paper: https://arxiv.org/abs/2512.04220  
-Hugging Face (models/checkpoints): https://huggingface.co/collections/SEGAgentRL/llds-search
+<h1 align="center">On GRPO Collapse in Search-R1: The Lazy Likelihood-Displacement Death Spiral</h1>
+
+
+<p align="center">
+📃 <a href="https://arxiv.org/abs/2512.04220" target="_blank">Paper</a> </a> ｜🤗 <a href="https://huggingface.co/SEGAgentRL" target="_blank">LLDS-Huggingface</a> ｜🐙 <a href="https://github.com/vengdeng/LLDS-On-Group-Relative-Policy-Optimization-Collapse-in-Search-R1" target="_blank">GitHub</a>
+</p>
 
 ## ⚡ Introduction
 
@@ -153,6 +156,11 @@ bash evaluate.sh
 - `MASK_ADAPTIVE`: adaptive answer mask weighting.
 - `NAN_CLIP`: gradient NaN clipping safeguard.
 
+## Usage in MoE
+
+- You should activate router replay to ensure the inference and training route the same expert and LLDS can correctly fix on them.
+- LLDS is an algorithm-level solution that addresses instability sources such as OOD feedback and training–inference mismatch introduced by inference optimizations (e.g., quantization and kernel optimization), excluding misaligned expert routing where gradients cannot be propagated to the target expert.
+
 ## Notes
 
 - This repo is a focused LLDS/Search-R1-style training workspace, so path values in scripts are examples and should be updated to your environment.
@@ -163,10 +171,9 @@ bash evaluate.sh
 If you use this work, please cite:
 
 ```bibtex
-@article{llds2025,
-  title={On Group Relative Policy Optimization Collapse in Agent Search: The Lazy Likelihood-Displacement}, 
+@inproceedings{deng2026group,
+  title={On Group Relative Policy Optimization Collapse in Agent Search: The Lazy Likelihood-Displacement},
   author={Deng, Wenlong and Li, Yushu and Gong, Boying and Ren, Yi and Thrampoulidis, Christos and Li, Xiaoxiao},
-  journal={arXiv preprint arXiv:2512.04220},
-  year={2025}
+  booktitle={ICML 2026}
 }
 ```
