@@ -156,6 +156,10 @@ bash evaluate.sh
 - `MASK_ADAPTIVE`: adaptive answer mask weighting.
 - `NAN_CLIP`: gradient NaN clipping safeguard.
 
+## Note on Micro batch size
+- Currently, we set ppo_mini_batch_size / ppo_micro_batch_size to 4 so that the old policy remains different from the current training policy.
+- If you want to reduce it to 1, you can instead actively maintain an additional old policy checkpoint from several iterations earlier.
+
 ## Usage in MoE
 
 - You should activate router replay to ensure the inference and training route the same expert and LLDS can correctly fix on them.
